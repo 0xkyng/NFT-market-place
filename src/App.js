@@ -77,18 +77,15 @@ function App() {
         );
 
         const tokenLength = Number(await tokenContract.tokenCounter());
-        console.log("token len: " + tokenLength)
         const _tokens = [];
         for (let counter = 0; counter < tokenLength; counter++) {
           const tokenUri = await tokenContract.tokenURI(counter);
-          // const tokenMeta = await axios.get(tokenUri);
-          // _tokens.push(tokenMeta.data);
-          console.log("token URI:" + tokenUri)
+          const tokenMeta = await axios.get(tokenUri);
+          _tokens.push(tokenMeta.data);
         }
 
         setWalletBalance(bal)
         setNfts(_tokens);
-        console.log("tokens: "+_tokens)
       } else {
         console.log("Metamask not installed");
       }
